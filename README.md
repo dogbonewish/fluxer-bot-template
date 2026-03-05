@@ -4,6 +4,8 @@ A clean, everything included starter template for building bots with [`@fluxerjs
 
 This comes with a custom command handler, event handler, console logging, and a silly persons project structure -- so you can focus on building your own commands instead of all the other nonsense!
 
+![Demo](assets/demo.gif)
+
 ## Features
 
 - **Custom Command Handler** - auto-loads commands from categorized folders, with aliases, permissions, cooldowns, and support for commands only the "Owner" can run (config  in .env).
