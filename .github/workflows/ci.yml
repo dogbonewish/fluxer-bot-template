@@ -44,5 +44,5 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Check formatting (if prettier is configured)
-        run: npx prettier --check . --ignore-unknown || echo "Prettier not configured, skipping."
+      - name: Check formatting
+        run: npx prettier --check . --ignore-unknown

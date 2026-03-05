@@ -14,9 +14,7 @@ const config: BotConfig = {
   },
 
   validate(): boolean {
-    const required: [string, string][] = [
-      ['TOKEN', this.token],
-    ];
+    const required: [string, string][] = [['TOKEN', this.token]];
 
     let valid = true;
     for (const [name, value] of required) {

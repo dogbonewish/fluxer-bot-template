@@ -22,10 +22,10 @@ const command: Command = {
 
       const embed = new EmbedBuilder()
         .setTitle('Pong!')
-        .setColor(0x5865F2)
+        .setColor(0x5865f2)
         .addFields(
-          { name: 'REST API',          value: `\`${restLatency}ms\``,  inline: true },
-          { name: 'Message Round-trip', value: `\`${msgLatency}ms\``, inline: true },
+          { name: 'REST API', value: `\`${restLatency}ms\``, inline: true },
+          { name: 'Message Round-trip', value: `\`${msgLatency}ms\``, inline: true }
         )
         .setTimestamp();
 

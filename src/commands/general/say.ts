@@ -12,12 +12,14 @@ const command: Command = {
 
   async execute(message, args) {
     if (!args.length) {
-      return void await message.reply(`Usage: \`${config.prefix}say <message>\``).catch(() => {});
+      return void (await message.reply(`Usage: \`${config.prefix}say <message>\``).catch(() => {}));
     }
 
     const text = args.join(' ');
 
-    try { await (message as any).delete(); } catch {}
+    try {
+      await (message as any).delete();
+    } catch {}
 
     await (message as any).channel?.send?.(text).catch(() => {
       // fallbacks to a reply

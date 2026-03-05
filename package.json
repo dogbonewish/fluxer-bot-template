@@ -23,6 +23,7 @@
   },
   "devDependencies": {
     "@types/node": "^22.13.0",
+    "prettier": "^3.8.1",
     "rimraf": "^5.0.10",
     "tsc-alias": "^1.8.10",
     "tsx": "^4.19.0",

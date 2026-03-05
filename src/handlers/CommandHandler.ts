@@ -27,14 +27,18 @@ export default class CommandHandler {
       return;
     }
 
-    const categories = fs.readdirSync(commandsPath, { withFileTypes: true })
-      .filter(dirent => dirent.isDirectory())
-      .map(dirent => dirent.name);
+    const categories = fs
+      .readdirSync(commandsPath, { withFileTypes: true })
+      .filter((dirent) => dirent.isDirectory())
+      .map((dirent) => dirent.name);
 
     for (const category of categories) {
       const categoryPath = path.join(commandsPath, category);
-      const commandFiles = fs.readdirSync(categoryPath)
-        .filter(file => (file.endsWith('.ts') || file.endsWith('.js')) && !file.endsWith('.d.ts'));
+      const commandFiles = fs
+        .readdirSync(categoryPath)
+        .filter(
+          (file) => (file.endsWith('.ts') || file.endsWith('.js')) && !file.endsWith('.d.ts')
+        );
 
       for (const file of commandFiles) {
         try {
@@ -104,16 +108,16 @@ export default class CommandHandler {
         return;
       }
 
-      const hasPermission = command.permissions.some(perm => {
+      const hasPermission = command.permissions.some((perm) => {
         return (member as any).permissions?.has(
-          (PermissionFlags as unknown as Record<string, bigint>)[perm],
+          (PermissionFlags as unknown as Record<string, bigint>)[perm]
         );
       });
 
       if (!hasPermission) {
-        await message.reply(
-          `You need the following permissions: ${command.permissions.join(', ')}`,
-        ).catch(() => {});
+        await message
+          .reply(`You need the following permissions: ${command.permissions.join(', ')}`)
+          .catch(() => {});
         return;
       }
     }
@@ -129,9 +133,9 @@ export default class CommandHandler {
     // Cooldown check
     const cooldownInfo = this.checkCooldown((message as any).author.id, commandName);
     if (!cooldownInfo.ready) {
-      await message.reply(
-        `Please wait ${cooldownInfo.remaining} second(s) before using this command again.`,
-      ).catch(() => {});
+      await message
+        .reply(`Please wait ${cooldownInfo.remaining} second(s) before using this command again.`)
+        .catch(() => {});
       return;
     }
 

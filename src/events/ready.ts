@@ -20,17 +20,23 @@ const event: BotEvent = {
     const user = client.user;
 
     log.box('Bot Online', [
-      { label: 'User',   value: user?.username || 'Unknown' },
+      { label: 'User', value: user?.username || 'Unknown' },
       { label: 'Guilds', value: String(guilds) },
-      { label: 'Node',   value: process.version },
+      { label: 'Node', value: process.version },
     ]);
 
     // Optional: heartbeat log every 5 minutes
     const startedAt = Date.now();
-    setInterval(() => {
-      const memMB = (process.memoryUsage().heapUsed / 1024 / 1024).toFixed(1);
-      log.info('Heartbeat', `Uptime: ${formatUptime(Date.now() - startedAt)} | Memory: ${memMB} MB | Guilds: ${client.guilds?.size || 0}`);
-    }, 5 * 60 * 1000);
+    setInterval(
+      () => {
+        const memMB = (process.memoryUsage().heapUsed / 1024 / 1024).toFixed(1);
+        log.info(
+          'Heartbeat',
+          `Uptime: ${formatUptime(Date.now() - startedAt)} | Memory: ${memMB} MB | Guilds: ${client.guilds?.size || 0}`
+        );
+      },
+      5 * 60 * 1000
+    );
   },
 };
 

@@ -11,7 +11,7 @@ export default class EventHandler {
     this.client = client;
   }
 
-// Load all events from src/events/ and register them on the client.
+  // Load all events from src/events/ and register them on the client.
 
   async loadEvents(): Promise<void> {
     const eventsPath = path.join(__dirname, '..', 'events');
@@ -22,8 +22,9 @@ export default class EventHandler {
       return;
     }
 
-    const eventFiles = fs.readdirSync(eventsPath)
-      .filter(file => (file.endsWith('.ts') || file.endsWith('.js')) && !file.endsWith('.d.ts'));
+    const eventFiles = fs
+      .readdirSync(eventsPath)
+      .filter((file) => (file.endsWith('.ts') || file.endsWith('.js')) && !file.endsWith('.d.ts'));
 
     for (const file of eventFiles) {
       try {

@@ -15,7 +15,7 @@ try {
 
 // this is used to create the client :)
 const client = new Client({
-  intents: 0,  // fluxer.js does not support intents.
+  intents: 0, // fluxer.js does not support intents.
   presence: {
     status: 'online' as const,
     activities: [{ name: 'with @fluxerjs/core', type: 3 }],
@@ -32,9 +32,7 @@ const eventHandler = new EventHandler(client);
 
 // bot startup
 async function start(): Promise<void> {
-  log.banner([
-    `Fluxer Bot Template  v${require('../package.json').version}`,
-  ]);
+  log.banner([`Fluxer Bot Template  v${require('../package.json').version}`]);
 
   log.divider('Loading');
 

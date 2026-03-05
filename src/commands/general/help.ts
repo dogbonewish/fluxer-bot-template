@@ -13,7 +13,7 @@ const command: Command = {
 
   async execute(message, args, client) {
     const commandHandler = (client as any).commandHandler;
-    if (!commandHandler) return void await message.reply('Command handler not available.');
+    if (!commandHandler) return void (await message.reply('Command handler not available.'));
 
     const prefix = config.prefix;
     const isOwner = config.ownerId && (message as any).author.id === config.ownerId;
@@ -25,21 +25,30 @@ const command: Command = {
         const cmd = commandHandler.getCommand(cmdName);
 
         if (!cmd || cmd.hidden || (cmd.ownerOnly && !isOwner)) {
-          return void await message.reply(
-            `No command called \`${cmdName}\` found. Use \`${prefix}help\` to see all commands.`,
-          ).catch(() => {});
+          return void (await message
+            .reply(
+              `No command called \`${cmdName}\` found. Use \`${prefix}help\` to see all commands.`
+            )
+            .catch(() => {}));
         }
 
         const embed = new EmbedBuilder()
           .setTitle(cmd.name)
           .setDescription(
-            Array.isArray(cmd.description) ? cmd.description.join('\n') : cmd.description,
+            Array.isArray(cmd.description) ? cmd.description.join('\n') : cmd.description
           )
-          .setColor(0x5865F2)
-          .addFields({ name: 'Usage', value: `\`${prefix}${cmd.name}${cmd.usage ? ' ' + cmd.usage : ''}\`` });
+          .setColor(0x5865f2)
+          .addFields({
+            name: 'Usage',
+            value: `\`${prefix}${cmd.name}${cmd.usage ? ' ' + cmd.usage : ''}\``,
+          });
 
         if (cmd.aliases?.length) {
-          embed.addFields({ name: 'Aliases', value: cmd.aliases.map((a: string) => `\`${a}\``).join(' '), inline: true });
+          embed.addFields({
+            name: 'Aliases',
+            value: cmd.aliases.map((a: string) => `\`${a}\``).join(' '),
+            inline: true,
+          });
         }
         if (cmd.permissions?.length) {
           embed.addFields({ name: 'Permissions', value: cmd.permissions.join(', '), inline: true });
@@ -49,7 +58,7 @@ const command: Command = {
         }
 
         embed.setTimestamp();
-        return void await message.reply({ embeds: [embed] }).catch(() => {});
+        return void (await message.reply({ embeds: [embed] }).catch(() => {}));
       }
 
       // trhre full command list
@@ -57,7 +66,7 @@ const command: Command = {
       const embed = new EmbedBuilder()
         .setTitle('Commands')
         .setDescription(`Use \`${prefix}help <command>\` for details on a specific command.`)
-        .setColor(0x5865F2);
+        .setColor(0x5865f2);
 
       const sortedCategories = Object.keys(categories).sort((a, b) => {
         const ia = CATEGORY_ORDER.indexOf(a);
