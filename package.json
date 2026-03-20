@@ -19,7 +19,7 @@
   "author": "dogbonewish",
   "license": "MIT",
   "dependencies": {
-    "@fluxerjs/core": "^1.2.2",
+    "@fluxerjs/core": "^1.2.4",
     "dotenv": "^17.3.1",
     "zod": "^4.3.6"
   },
