@@ -16,8 +16,8 @@ function dumpProcessState(reason: string): void {
     const summarize = (x: any) => {
       const name = x?.constructor?.name ?? typeof x;
       const extra: Record<string, unknown> = {};
-      if (x?.hasOwnProperty?.('_idleTimeout')) extra._idleTimeout = x._idleTimeout;
-      if (x?.hasOwnProperty?.('_repeat')) extra._repeat = x._repeat;
+      if (Object.prototype.hasOwnProperty.call(x, '_idleTimeout')) extra._idleTimeout = x._idleTimeout;
+      if (Object.prototype.hasOwnProperty.call(x, '_repeat')) extra._repeat = x._repeat;
       if (typeof x?.listenerCount === 'function') extra.listeners = x.listenerCount('close');
       if (x?.localAddress) extra.local = `${x.localAddress}:${x.localPort}`;
       if (x?.remoteAddress) extra.remote = `${x.remoteAddress}:${x.remotePort}`;
