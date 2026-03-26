@@ -6,6 +6,34 @@ import CommandHandler from './handlers/CommandHandler';
 import EventHandler from './handlers/EventHandler';
 import log from './utils/logger';
 
+function dumpProcessState(reason: string): void {
+  if (!process.env.DEBUG_PROCESS_EXIT) return;
+
+  try {
+    const handles = (process as any)._getActiveHandles?.() ?? [];
+    const requests = (process as any)._getActiveRequests?.() ?? [];
+
+    const summarize = (x: any) => {
+      const name = x?.constructor?.name ?? typeof x;
+      const extra: Record<string, unknown> = {};
+      if (x?.hasOwnProperty?.('_idleTimeout')) extra._idleTimeout = x._idleTimeout;
+      if (x?.hasOwnProperty?.('_repeat')) extra._repeat = x._repeat;
+      if (typeof x?.listenerCount === 'function') extra.listeners = x.listenerCount('close');
+      if (x?.localAddress) extra.local = `${x.localAddress}:${x.localPort}`;
+      if (x?.remoteAddress) extra.remote = `${x.remoteAddress}:${x.remotePort}`;
+      return { name, extra };
+    };
+
+    log.warn('ProcessExit', `${reason}`);
+    log.info('ProcessExit', `pid=${process.pid} node=${process.version} platform=${process.platform}`);
+    log.info('ProcessExit', `activeHandles=${handles.length} activeRequests=${requests.length}`);
+    if (handles.length) log.info('ProcessExit', `handles=${JSON.stringify(handles.map(summarize))}`);
+    if (requests.length) log.info('ProcessExit', `requests=${JSON.stringify(requests.map(summarize))}`);
+  } catch (e: any) {
+    log.error('ProcessExit', e?.message || e);
+  }
+}
+
 // this is used to create the client :)
 const client = new Client({
   intents: 0, // fluxer.js does not support intents.
@@ -46,8 +74,8 @@ async function start(): Promise<void> {
   await client.login(config.token);
   log.step('Gateway', Date.now() - t);
 
-  // this may fix an issue another person is having 🥀
-  await new Promise<never>(() => {});
+   // this may fix an issue another person is having 🥀
+  setInterval(() => {}, 1 << 30);
 }
 
 // "GRACEFUL SHUTDOWN."
@@ -68,6 +96,9 @@ async function shutdown(signal: string): Promise<void> {
 
 process.on('SIGINT', () => shutdown('SIGINT'));
 process.on('SIGTERM', () => shutdown('SIGTERM'));
+
+process.on('beforeExit', (code) => dumpProcessState(`beforeExit code=${code}`));
+process.on('exit', (code) => dumpProcessState(`exit code=${code}`));
 
 // catch unhandled errors and log them to prevent the bot from crashing without any logs. This is especially useful for catching errors in events/commands that aren't properly handled.
 process.on('unhandledRejection', (error: any) => {
