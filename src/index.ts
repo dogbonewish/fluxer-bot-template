@@ -11,7 +11,7 @@ const client = new Client({
   intents: 0, // fluxer.js does not support intents.
   presence: {
     status: 'online' as const,
-    activities: [{ name: 'with @fluxerjs/core', type: 3 }],
+    custom_status: { text: 'Building a bot for fluxer!' }, // you can change the text to whatever you want!
     afk: false,
   },
 });
@@ -45,6 +45,9 @@ async function start(): Promise<void> {
   t = Date.now();
   await client.login(config.token);
   log.step('Gateway', Date.now() - t);
+
+  // this may fix an issue another person is having 🥀
+  await new Promise<never>(() => {});
 }
 
 // "GRACEFUL SHUTDOWN."
