@@ -16,7 +16,8 @@ function dumpProcessState(reason: string): void {
     const summarize = (x: any) => {
       const name = x?.constructor?.name ?? typeof x;
       const extra: Record<string, unknown> = {};
-      if (Object.prototype.hasOwnProperty.call(x, '_idleTimeout')) extra._idleTimeout = x._idleTimeout;
+      if (Object.prototype.hasOwnProperty.call(x, '_idleTimeout'))
+        extra._idleTimeout = x._idleTimeout;
       if (Object.prototype.hasOwnProperty.call(x, '_repeat')) extra._repeat = x._repeat;
       if (typeof x?.listenerCount === 'function') extra.listeners = x.listenerCount('close');
       if (x?.localAddress) extra.local = `${x.localAddress}:${x.localPort}`;
@@ -25,10 +26,15 @@ function dumpProcessState(reason: string): void {
     };
 
     log.warn('ProcessExit', `${reason}`);
-    log.info('ProcessExit', `pid=${process.pid} node=${process.version} platform=${process.platform}`);
+    log.info(
+      'ProcessExit',
+      `pid=${process.pid} node=${process.version} platform=${process.platform}`
+    );
     log.info('ProcessExit', `activeHandles=${handles.length} activeRequests=${requests.length}`);
-    if (handles.length) log.info('ProcessExit', `handles=${JSON.stringify(handles.map(summarize))}`);
-    if (requests.length) log.info('ProcessExit', `requests=${JSON.stringify(requests.map(summarize))}`);
+    if (handles.length)
+      log.info('ProcessExit', `handles=${JSON.stringify(handles.map(summarize))}`);
+    if (requests.length)
+      log.info('ProcessExit', `requests=${JSON.stringify(requests.map(summarize))}`);
   } catch (e: any) {
     log.error('ProcessExit', e?.message || e);
   }
@@ -74,7 +80,7 @@ async function start(): Promise<void> {
   await client.login(config.token);
   log.step('Gateway', Date.now() - t);
 
-   // this may fix an issue another person is having 🥀
+  // this may fix an issue another person is having 🥀
   setInterval(() => {}, 1 << 30);
 }
 
