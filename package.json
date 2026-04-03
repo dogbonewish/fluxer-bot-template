@@ -20,7 +20,7 @@
   "license": "MIT",
   "dependencies": {
     "@fluxerjs/core": "^1.2.4",
-    "dotenv": "^17.3.1",
+    "dotenv": "^17.4.0",
     "zod": "^4.3.6"
   },
   "devDependencies": {
