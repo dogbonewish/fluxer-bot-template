@@ -40,8 +40,8 @@ export default class EventHandler {
         const handler = (...args: unknown[]) => {
           try {
             const result = event.execute(...args, this.client);
-            if (result && typeof (result as any).catch === 'function') {
-              (result as any).catch((err: Error) => {
+            if (result && typeof result.catch === 'function') {
+              result.catch((err: Error) => {
                 console.error(`[EventHandler] Unhandled error in event ${event.name}:`, err);
               });
             }
