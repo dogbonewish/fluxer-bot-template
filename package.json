@@ -19,20 +19,20 @@
   "author": "dogbonewish",
   "license": "MIT",
   "dependencies": {
-    "@fluxerjs/core": "^1.2.4",
-    "dotenv": "^17.4.1",
+    "@fluxerjs/core": "^1.3.0",
+    "dotenv": "^17.4.2",
     "zod": "^4.3.6"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
-    "@types/node": "^25.5.0",
+    "@types/node": "^25.6.0",
     "eslint": "^10.2.0",
-    "prettier": "^3.8.1",
+    "prettier": "^3.8.2",
     "rimraf": "^6.1.3",
     "tsc-alias": "^1.8.10",
     "tsx": "^4.19.0",
-    "typescript": "^5.7.3",
-    "typescript-eslint": "^8.58.1"
+    "typescript": "^6.0.2",
+    "typescript-eslint": "^8.58.2"
   },
   "engines": {
     "node": ">=18.0.0"
