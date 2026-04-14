@@ -1,4 +1,4 @@
-import type { BotEvent } from '../types';
+import type { BotEvent } from '@/types';
 
 const event: BotEvent = {
   name: 'messageCreate',

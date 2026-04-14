@@ -2,7 +2,7 @@
 // ownerOnly: true — only the bot owner (OWNER_ID in .env) can run this
 // hidden: true    — won't show up in !help for regular users
 
-import type { Command } from '../../types';
+import type { Command } from '@/types';
 
 const command: Command = {
   name: 'secret',

@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import type { Client } from '@fluxerjs/core';
-import type { BotEvent } from '../types';
+import type { BotEvent } from '@/types';
 
 export default class EventHandler {
   client: Client;

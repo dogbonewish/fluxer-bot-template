@@ -1,7 +1,7 @@
 // this is an example command! remove at your own discretion!
 
-import type { Command } from '../../types';
-import config from '../../config';
+import type { Command } from '@/types';
+import config from '@/config';
 
 const command: Command = {
   name: 'say',

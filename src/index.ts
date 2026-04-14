@@ -5,6 +5,7 @@ import config from './config';
 import CommandHandler from './handlers/CommandHandler';
 import EventHandler from './handlers/EventHandler';
 import log from './utils/logger';
+import packageJson from '../package.json';
 
 function dumpProcessState(reason: string): void {
   if (!process.env.DEBUG_PROCESS_EXIT) return;
@@ -59,7 +60,7 @@ const eventHandler = new EventHandler(client);
 
 // bot startup
 async function start(): Promise<void> {
-  log.banner([`Fluxer Bot Template  v${require('../package.json').version}`]);
+  log.banner([`Fluxer Bot Template  v${packageJson.version}`]);
 
   log.divider('Loading');
 

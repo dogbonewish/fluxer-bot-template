@@ -1,5 +1,5 @@
-import type { BotEvent } from '../types';
-import log from '../utils/logger';
+import type { BotEvent } from '@/types';
+import log from '@/utils/logger';
 
 function formatUptime(ms: number): string {
   const s = Math.floor(ms / 1000);

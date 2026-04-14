@@ -1,5 +1,5 @@
-import type { BotEvent } from '../types';
-import log from '../utils/logger';
+import type { BotEvent } from '@/types';
+import log from '@/utils/logger';
 
 // fires whenever a new member joins a guild the bot is in
 const event: BotEvent = {

@@ -1,7 +1,7 @@
 // this is an example command! remove at your own discretion!
 
 import { EmbedBuilder } from '@fluxerjs/core';
-import type { Command } from '../../types';
+import type { Command } from '@/types';
 
 // derives account creation date from a fluxer snowflake id (no createdAt property on User)
 function snowflakeToDate(id: string): Date {

@@ -1,6 +1,6 @@
 import { EmbedBuilder } from '@fluxerjs/core';
-import type { Command } from '../../types';
-import config from '../../config';
+import type { Command } from '@/types';
+import config from '@/config';
 
 const CATEGORY_ORDER = ['general', 'moderation', 'admin', 'info'];
 

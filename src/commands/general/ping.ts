@@ -1,7 +1,7 @@
 // this is another example command! a;slo remove at your own discretion!
 
 import { EmbedBuilder, Routes } from '@fluxerjs/core';
-import type { Command } from '../../types';
+import type { Command } from '@/types';
 
 const command: Command = {
   name: 'ping',
