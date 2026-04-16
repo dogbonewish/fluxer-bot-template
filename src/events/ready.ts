@@ -1,5 +1,6 @@
-import type { BotEvent } from '../types';
-import log from '../utils/logger';
+import type { BotEvent } from '@/types';
+import log from '@/utils/logger';
+import type { Client } from '@fluxerjs/core';
 
 function formatUptime(ms: number): string {
   const s = Math.floor(ms / 1000);
@@ -15,7 +16,7 @@ const event: BotEvent = {
   name: 'ready',
   once: true,
 
-  execute(client: any) {
+  execute(client: Client) {
     const guilds = client.guilds?.size || 0;
     const user = client.user;
 

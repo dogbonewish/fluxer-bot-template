@@ -1,6 +1,6 @@
 import { EmbedBuilder } from '@fluxerjs/core';
-import type { Command } from '../../types';
-import config from '../../config';
+import type { Command } from '@/types';
+import config from '@/config';
 
 const CATEGORY_ORDER = ['general', 'moderation', 'admin', 'info'];
 
@@ -12,11 +12,11 @@ const command: Command = {
   cooldown: 5,
 
   async execute(message, args, client) {
-    const commandHandler = (client as any).commandHandler;
+    const commandHandler = client.commandHandler;
     if (!commandHandler) return void (await message.reply('Command handler not available.'));
 
     const prefix = config.prefix;
-    const isOwner = config.ownerId && (message as any).author.id === config.ownerId;
+    const isOwner = config.ownerId && message.author.id === config.ownerId;
 
     try {
       // specific command info
@@ -90,8 +90,8 @@ const command: Command = {
 
       embed.setTimestamp();
       await message.reply({ embeds: [embed] }).catch(() => {});
-    } catch (error: any) {
-      console.error(`Error in !help: ${error.message || error}`);
+    } catch (error) {
+      console.error(`Error in !help: ${error instanceof Error ? error.message : error}`);
     }
   },
 };

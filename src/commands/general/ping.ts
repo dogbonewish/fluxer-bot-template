@@ -1,7 +1,7 @@
 // this is another example command! a;slo remove at your own discretion!
 
 import { EmbedBuilder, Routes } from '@fluxerjs/core';
-import type { Command } from '../../types';
+import type { Command } from '@/types';
 
 const command: Command = {
   name: 'ping',
@@ -30,8 +30,8 @@ const command: Command = {
         .setTimestamp();
 
       await msg.edit({ content: '', embeds: [embed] });
-    } catch (error: any) {
-      console.error(`Error in !ping: ${error.message || error}`);
+    } catch (error) {
+      console.error(`Error in !ping: ${error instanceof Error ? error.message : error}`);
     }
   },
 };

@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import type { Client } from '@fluxerjs/core';
-import type { BotEvent } from '../types';
+import type { BotEvent } from '@/types';
 
 export default class EventHandler {
   client: Client;
@@ -40,8 +40,8 @@ export default class EventHandler {
         const handler = (...args: unknown[]) => {
           try {
             const result = event.execute(...args, this.client);
-            if (result && typeof (result as any).catch === 'function') {
-              (result as any).catch((err: Error) => {
+            if (result && typeof result.catch === 'function') {
+              result.catch((err: Error) => {
                 console.error(`[EventHandler] Unhandled error in event ${event.name}:`, err);
               });
             }
@@ -76,8 +76,11 @@ export default class EventHandler {
             names.size > 1 ? ` (aliases: ${Array.from(names).join(', ')})` : ''
           }`
         );
-      } catch (error: any) {
-        console.error(`[EventHandler] Error loading event ${file}:`, error.message);
+      } catch (error) {
+        console.error(
+          `[EventHandler] Error loading event ${file}:`,
+          error instanceof Error ? error.message : error
+        );
       }
     }
 

@@ -1,7 +1,7 @@
 // this is an example command! remove at your own discretion!
 
 import { EmbedBuilder } from '@fluxerjs/core';
-import type { Command } from '../../types';
+import type { Command } from '@/types';
 
 // derives account creation date from a fluxer snowflake id (no createdAt property on User)
 function snowflakeToDate(id: string): Date {
@@ -40,8 +40,8 @@ const command: Command = {
         .setTimestamp();
 
       await message.reply({ embeds: [embed] }).catch(() => {});
-    } catch (error: any) {
-      console.error(`Error in !userinfo: ${error.message || error}`);
+    } catch (error) {
+      console.error(`Error in !userinfo: ${error instanceof Error ? error.message : error}`);
     }
   },
 };

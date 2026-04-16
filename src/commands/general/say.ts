@@ -1,7 +1,7 @@
 // this is an example command! remove at your own discretion!
 
-import type { Command } from '../../types';
-import config from '../../config';
+import type { Command } from '@/types';
+import config from '@/config';
 
 const command: Command = {
   name: 'say',
@@ -18,10 +18,10 @@ const command: Command = {
     const text = args.join(' ');
 
     try {
-      await (message as any).delete();
+      await message.delete();
     } catch {}
 
-    await (message as any).channel?.send?.(text).catch(() => {
+    await message.channel?.send?.({ content: text }).catch(() => {
       // fallbacks to a reply
       message.reply(text).catch(() => {});
     });
